@@ -11,30 +11,26 @@ import { UNITS } from './const';
 export const CONFIG = [
   {
     name: `rootFontSize`,
-    default: 16,
+    defaultValue: 16,
     validator: validateIsNumberOrNumberWithPx,
     transformer: numberOrPxNumberToNumber,
-    isRequired: true,
   },
   {
     name: `rhythm`,
     validator: validateIsNumberOrNumberWithPx,
     transformer: numberOrPxNumberToNumber,
-    default: 20,
-    isRequired: true,
+    defaultValue: 20,
   },
   {
     name: `renderUnit`,
-    default: UNITS.REM,
+    defaultValue: UNITS.REM,
     validator: validateIsWhitelistedString(values(UNITS)),
     transformer: identity,
-    isRequired: true,
   },
   {
     name: `opticalAdjustment`,
-    default: 0,
+    defaultValue: 0,
     validator: validateIsValidNumber,
     transformer: identity,
-    isRequired: true,
   },
 ];

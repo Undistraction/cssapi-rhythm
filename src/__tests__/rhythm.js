@@ -3,7 +3,7 @@ import { isObj } from 'ramda-adjunct';
 import rhythm from '../index';
 import { UNITS } from '../const';
 
-describe.only(`rhythm`, () => {
+describe(`rhythm`, () => {
   describe(`configure()`, () => {
     describe(`with no arguments`, () => {
       it(`doesn't throw`, () => {
@@ -37,7 +37,7 @@ describe.only(`rhythm`, () => {
       it(`throws`, () => {
         const value = { renderUnit: `100%`, rhythm: `x` };
         expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Object included invalid values(s): Key 'rhythm': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'renderUnit': Value wan't one of the accepted values: rem, em, px`
+          `The config object was invalid: Object included invalid values(s): Key 'renderUnit': Value wan't one of the accepted values: rem, em, px, Key 'rhythm': Wasn't a valid Number and Wasn't number with unit: 'px'`
         );
       });
     });
