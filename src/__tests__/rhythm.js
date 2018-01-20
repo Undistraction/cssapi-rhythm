@@ -28,7 +28,7 @@ describe(`rhythm`, () => {
       it(`throws`, () => {
         const value = { a: 1, b: 2 };
         expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Object included invalid key(s): '[a, b]`
+          `The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]`
         );
       });
     });
@@ -37,7 +37,7 @@ describe(`rhythm`, () => {
       it(`throws`, () => {
         const value = { renderUnit: `100%`, rhythm: `x` };
         expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Object included invalid values(s): Key 'renderUnit': Value wan't one of the accepted values: rem, em, px, Key 'rhythm': Wasn't a valid Number and Wasn't number with unit: 'px'`
+          `The config object was invalid: Object Invalid: Object included invalid values(s): Key 'renderUnit': Value wasn't one of the accepted values: rem, em, px, Key 'rhythm': Wasn't a valid Number and Wasn't number with unit: 'px'`
         );
       });
     });
