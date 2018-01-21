@@ -2,14 +2,15 @@ import { orValidator, validateIsNotUndefined } from 'folktale-validations';
 import { validation as Validation } from 'folktale';
 import { prop, always, compose } from 'ramda';
 import andValidator from 'folktale-validations/lib/helpers/andValidator';
+import { FIELD_NAMES } from '../const';
 
-const { collect, Success, Failure } = Validation;
+const { Success, Failure } = Validation;
 
-const rhythmProp = prop(`rhythm`);
-const hRhythmProp = prop(`horizontalRhythm`);
-const vRhythmProp = prop(`verticalRhythm`);
+const { RHYTHM, HORIZONTAL_RHYTHM, VERTICAL_RHYTHM } = FIELD_NAMES;
 
-console.log(`SUCCESS`, collect);
+const rhythmProp = prop(RHYTHM);
+const hRhythmProp = prop(HORIZONTAL_RHYTHM);
+const vRhythmProp = prop(VERTICAL_RHYTHM);
 
 export default o =>
   orValidator(
@@ -22,7 +23,7 @@ export default o =>
     Success: always(Success(o)),
     Failure: always(
       Failure(
-        `You must supply either a 'rhythm' or both a 'horizontalRhythm' and a 'verticalRhythm'`
+        `You must supply either a '${RHYTHM}' or both a '${HORIZONTAL_RHYTHM}' and a '${VERTICAL_RHYTHM}'`
       )
     ),
   });

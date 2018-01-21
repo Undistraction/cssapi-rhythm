@@ -5,17 +5,8 @@ import {
 import { values } from 'ramda';
 import validateIsNumberOrNumberWithPx from './validators/validateIsNumberOrNumberWithPx';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
-import { UNITS } from './const';
+import { UNITS, FIELD_NAMES } from './const';
 import validateConfiguredRhythm from './validators/validateConfiguredRhythm';
-
-export const FIELD_NAMES = Object.freeze({
-  ROOT_FONT_SIZE: `rootFontSize`,
-  RHYTHM: `rhythm`,
-  HORIZONTAL_RHYTHM: `horizontalRhythm`,
-  VERTICAL_RHYTHM: `verticalRhythm`,
-  RENDER_UNIT: `renderUnit`,
-  OPTICAL_ADJUSTMENT: `opticalAdjustment`,
-});
 
 const {
   ROOT_FONT_SIZE,

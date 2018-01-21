@@ -12,13 +12,11 @@ const throwOrBuildApi = config =>
     },
   });
 
-const configure = (config = {}) => {
-  console.log(`CONFIG`, config);
-  return validateIsObject(config).matchWith({
+const configure = config =>
+  validateIsObject(config).matchWith({
     Success: ({ value }) => throwOrBuildApi(value),
     Failure: ({ value }) => compose(throwError, invalidConfigMessage)(value),
   });
-};
 
 export default {
   configure,
