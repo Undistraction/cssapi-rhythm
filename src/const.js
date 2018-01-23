@@ -12,4 +12,15 @@ export const FIELD_NAMES = Object.freeze({
   VERTICAL_RHYTHM: `verticalRhythm`,
   RENDER_UNIT: `renderUnit`,
   OPTICAL_ADJUSTMENT: `opticalAdjustment`,
+  UNIT: `unit`,
+  ARG1: `arg1`,
+  ARG2: `arg2`,
+  ARG3: `arg3`,
+  ARG4: `arg4`,
 });
+
+export const ERROR_PREFIX = `[cssjs-rhythm]`;
+export const CONFIGURE_PREFIX = `configure()`;
+export const API_VERTICAL_RHYTHM_PREFIX = `verticalRhythm()`;
+export const API_HORIZONTAL_RHYTHM_PREFIX = `horizontalRhythm()`;
+export const API_RHYTHM_PREFIX = `rhythm()`;

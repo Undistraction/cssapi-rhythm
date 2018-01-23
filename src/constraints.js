@@ -15,10 +15,14 @@ const {
   OPTICAL_ADJUSTMENT,
   HORIZONTAL_RHYTHM,
   VERTICAL_RHYTHM,
+  UNIT,
+  ARG1,
+  ARG2,
+  ARG3,
+  ARG4,
 } = FIELD_NAMES;
 
-// eslint-disable-next-line import/prefer-default-export
-export default {
+export const CONFIG = {
   fieldsValidator: validateConfiguredRhythm,
   fields: [
     {
@@ -50,6 +54,48 @@ export default {
     {
       name: OPTICAL_ADJUSTMENT,
       defaultValue: 0,
+      validator: validateIsValidNumber,
+    },
+  ],
+};
+
+export const API_VERTICAL_RHYTHM = {
+  fields: [
+    {
+      name: UNIT,
+      validator: validateIsValidNumber,
+      isRequired: true,
+    },
+  ],
+};
+
+export const API_HORIZONTAL_RHYTHM = {
+  fields: [
+    {
+      name: UNIT,
+      validator: validateIsValidNumber,
+      isRequired: true,
+    },
+  ],
+};
+
+export const API_RHYTHM = {
+  fields: [
+    {
+      name: ARG1,
+      validator: validateIsValidNumber,
+      isRequired: true,
+    },
+    {
+      name: ARG2,
+      validator: validateIsValidNumber,
+    },
+    {
+      name: ARG3,
+      validator: validateIsValidNumber,
+    },
+    {
+      name: ARG4,
       validator: validateIsValidNumber,
     },
   ],

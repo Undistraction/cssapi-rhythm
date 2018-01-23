@@ -24,3 +24,15 @@ export const notObject = [
   true,
   false,
 ];
+
+export const notNumberOrUndefined = [
+  [],
+  {},
+  function() {},
+  /x/,
+  `x`,
+  null,
+  NaN,
+  true,
+  false,
+];

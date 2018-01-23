@@ -6,10 +6,23 @@ import {
   subtract,
   always,
   ifElse,
+  assoc,
+  objOf,
 } from 'ramda';
-import { isUndefined, defaultWhen } from 'ramda-adjunct';
+import { isUndefined, defaultWhen, isNotUndefined } from 'ramda-adjunct';
 import { outputWithUnit } from 'cssjs-units';
-import { joinWithSpace } from './utils';
+import { joinWithSpace, reduceIndexed } from './utils';
+import {
+  throwAPIVerticalRhythmError,
+  invalidAPIVericalRhythmMessage,
+  throwAPIHorizontalRhythmError,
+  invalidAPIHorizontalRhythmMessage,
+  throwAPIRhythmError,
+  invalidAPIRhythmMessage,
+} from './errors';
+import validateAPIRhythmSingleArg from './validators/validateAPIRhythmSingleArg';
+import validateAPIRhythmMultiArg from './validators/validateAPIRhythmMultiArg';
+import { FIELD_NAMES } from './const';
 
 export default config => {
   const {
@@ -48,7 +61,13 @@ export default config => {
   const outputVerticalRhythm = outputRhythm(toVerticalRhythm);
   const outputHorizontalRhythm = outputRhythm(toHorizontalRhythm);
 
-  const multi = (...args) => {
+  const unitToValidationObj = ifElse(
+    isNotUndefined,
+    objOf(FIELD_NAMES.UNIT),
+    always({})
+  );
+
+  const outputMultipleRhythm = (...args) => {
     switch (args.length) {
       case 1:
         return hasUnifiedRhythm
@@ -79,9 +98,39 @@ export default config => {
     }
   };
 
+  const vr = unit => {
+    validateAPIRhythmSingleArg(unitToValidationObj(unit)).orElse(
+      compose(throwAPIVerticalRhythmError, invalidAPIVericalRhythmMessage)
+    );
+    return outputVerticalRhythm(unit);
+  };
+
+  const hr = unit => {
+    validateAPIRhythmSingleArg(unitToValidationObj(unit)).orElse(
+      compose(throwAPIHorizontalRhythmError, invalidAPIHorizontalRhythmMessage)
+    );
+    return outputHorizontalRhythm(unit);
+  };
+
+  const r = (...args) => {
+    // Add args to object
+    const o = reduceIndexed(
+      (acc, v, i) => assoc(`arg${i + 1}`, v, acc),
+      {},
+      args
+    );
+    validateAPIRhythmMultiArg(o).orElse(
+      compose(throwAPIRhythmError, invalidAPIRhythmMessage)
+    );
+    return outputMultipleRhythm(...args);
+  };
+
   return {
-    vr: outputVerticalRhythm,
-    hr: outputHorizontalRhythm,
-    r: multi,
+    vr, // Alias
+    hr, // Alias
+    r, // Alias
+    verticalRhythm: vr,
+    horizontalRhythm: hr,
+    rhythm: r,
   };
 };
