@@ -6,7 +6,7 @@ import { notNumberOrUndefined } from '../testHelpers/fixtures';
 
 describe(`rhythm()`, () => {
   describe(`with missing args`, () => {
-    const rhythm = createRhythm.configure(buildConfig());
+    const rhythm = createRhythm(buildConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
         expect(() => rhythm.rhythm()).toThrow(
@@ -17,7 +17,7 @@ describe(`rhythm()`, () => {
   });
 
   describe(`with invalid args`, () => {
-    const rhythm = createRhythm.configure(buildConfig());
+    const rhythm = createRhythm(buildConfig());
     describe(`first arg`, () => {
       map(invalidValue => {
         expect(() => rhythm.rhythm(invalidValue)).toThrow(
@@ -61,7 +61,7 @@ describe(`rhythm()`, () => {
 
   describe(`with valid args`, () => {
     describe(`with minimum configuration`, () => {
-      const rhythm = createRhythm.configure(buildConfig());
+      const rhythm = createRhythm(buildConfig());
 
       describe(`for a single value`, () => {
         it(`returns two values in the correct order`, () => {
@@ -92,9 +92,7 @@ describe(`rhythm()`, () => {
 
     describe(`with custom configuration`, () => {
       describe(`configured 'rootFontSize'`, () => {
-        const rhythm = createRhythm.configure(
-          buildConfig({ rootFontSize: 10 })
-        );
+        const rhythm = createRhythm(buildConfig({ rootFontSize: 10 }));
 
         describe(`for a single value`, () => {
           it(`returns two values in the correct order`, () => {
@@ -122,7 +120,7 @@ describe(`rhythm()`, () => {
       });
 
       describe(`configured 'rhythm'`, () => {
-        const rhythm = createRhythm.configure(buildConfig({ rhythm: 40 }));
+        const rhythm = createRhythm(buildConfig({ rhythm: 40 }));
 
         describe(`for a single value`, () => {
           it(`returns two values in the correct order`, () => {
@@ -152,9 +150,7 @@ describe(`rhythm()`, () => {
       });
 
       describe(`configured 'renderUnit'`, () => {
-        const rhythm = createRhythm.configure(
-          buildConfig({ renderUnit: UNITS.PX })
-        );
+        const rhythm = createRhythm(buildConfig({ renderUnit: UNITS.PX }));
 
         describe(`for a single value`, () => {
           it(`returns two values in the correct order`, () => {
@@ -184,7 +180,7 @@ describe(`rhythm()`, () => {
   });
 
   describe(`r`, () => {
-    const rhythm = createRhythm.configure(buildConfig());
+    const rhythm = createRhythm(buildConfig());
     it(`is aliased to 'rhythm'`, () => {
       expect(rhythm.r).toBe(rhythm.rhythm);
     });

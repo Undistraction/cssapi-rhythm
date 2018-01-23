@@ -11,12 +11,8 @@ const throwOrBuildApi = config =>
     Failure: compose(throwConfigureError, invalidConfigMessage, propValue),
   });
 
-const configure = config =>
+export default config =>
   validateIsObject(config).matchWith({
     Success: compose(throwOrBuildApi, propValue),
     Failure: compose(throwConfigureError, invalidConfigMessage, propValue),
   });
-
-export default {
-  configure,
-};

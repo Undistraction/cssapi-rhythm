@@ -6,7 +6,7 @@ import { notNumberOrUndefined } from '../testHelpers/fixtures';
 
 describe(`verticalRhythm()`, () => {
   describe(`with missing args`, () => {
-    const rhythm = createRhythm.configure(buildConfig());
+    const rhythm = createRhythm(buildConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
         expect(() => rhythm.verticalRhythm()).toThrow(
@@ -17,7 +17,7 @@ describe(`verticalRhythm()`, () => {
   });
 
   describe(`with invalid args`, () => {
-    const rhythm = createRhythm.configure(buildConfig());
+    const rhythm = createRhythm(buildConfig());
     describe.only(`with invalid arg 'unit'`, () => {
       map(invalidValue => {
         expect(() => rhythm.verticalRhythm(invalidValue)).toThrow(
@@ -29,7 +29,7 @@ describe(`verticalRhythm()`, () => {
 
   describe(`with valid args`, () => {
     describe(`with minimum configuration`, () => {
-      const rhythm = createRhythm.configure(buildConfig());
+      const rhythm = createRhythm(buildConfig());
 
       it(`returns the correct vertical rhythm`, () => {
         expect(rhythm.verticalRhythm(1)).toEqual(`1.25rem`);
@@ -38,9 +38,7 @@ describe(`verticalRhythm()`, () => {
 
     describe(`with custom configuration`, () => {
       describe(`configured 'rootFontSize'`, () => {
-        const rhythm = createRhythm.configure(
-          buildConfig({ rootFontSize: 10 })
-        );
+        const rhythm = createRhythm(buildConfig({ rootFontSize: 10 }));
 
         it(`returns the correct vertical rhythm`, () => {
           expect(rhythm.verticalRhythm(1)).toEqual(`2rem`);
@@ -48,25 +46,21 @@ describe(`verticalRhythm()`, () => {
       });
 
       describe(`configured 'rhythm'`, () => {
-        const rhythm = createRhythm.configure(buildConfig({ rhythm: 40 }));
+        const rhythm = createRhythm(buildConfig({ rhythm: 40 }));
         it(`returns the correct vertical rhythm`, () => {
           expect(rhythm.verticalRhythm(1)).toEqual(`2.5rem`);
         });
       });
 
       describe(`configured 'renderUnit'`, () => {
-        const rhythm = createRhythm.configure(
-          buildConfig({ renderUnit: UNITS.PX })
-        );
+        const rhythm = createRhythm(buildConfig({ renderUnit: UNITS.PX }));
         it(`returns the correct vertical rhythm`, () => {
           expect(rhythm.verticalRhythm(1)).toEqual(`20px`);
         });
       });
 
       describe(`configured 'opticalAdjustment'`, () => {
-        const rhythm = createRhythm.configure(
-          buildConfig({ opticalAdjustment: 0.05 })
-        );
+        const rhythm = createRhythm(buildConfig({ opticalAdjustment: 0.05 }));
 
         it(`returns the correct vertical rhythm`, () => {
           expect(rhythm.verticalRhythm(1)).toEqual(`1.25rem`);
@@ -74,7 +68,7 @@ describe(`verticalRhythm()`, () => {
       });
 
       describe(`configured 'horizontalRhythm' and 'verticalRhythm'`, () => {
-        const rhythm = createRhythm.configure(
+        const rhythm = createRhythm(
           buildConfig({ verticalRhythm: 30, horizontalRhythm: 40 })
         );
 
@@ -86,7 +80,7 @@ describe(`verticalRhythm()`, () => {
   });
 
   describe(`vr`, () => {
-    const rhythm = createRhythm.configure(buildConfig());
+    const rhythm = createRhythm(buildConfig());
     it(`is aliased to 'verticalRhythm'`, () => {
       expect(rhythm.vr).toBe(rhythm.verticalRhythm);
     });
