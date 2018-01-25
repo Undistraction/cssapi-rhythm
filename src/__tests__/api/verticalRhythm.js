@@ -10,7 +10,7 @@ describe(`verticalRhythm()`, () => {
     describe(`with no args`, () => {
       it(`throws`, () => {
         expect(() => rhythm.verticalRhythm()).toThrow(
-          `[cssjs-rhythm] verticalRhythm() Object Invalid: Object was missing required key(s): ['unit']`
+          `[cssapi-rhythm] verticalRhythm() Object Invalid: Object was missing required key(s): ['unit']`
         );
       });
     });
@@ -21,7 +21,7 @@ describe(`verticalRhythm()`, () => {
     describe.only(`with invalid arg 'unit'`, () => {
       map(invalidValue => {
         expect(() => rhythm.verticalRhythm(invalidValue)).toThrow(
-          `[cssjs-rhythm] verticalRhythm() You supplied invalid Arguments: Argument 'unit': Wasn't a valid Number`
+          `[cssapi-rhythm] verticalRhythm() You supplied invalid Arguments: Argument 'unit': Wasn't a valid Number`
         );
       })(notNumberOrUndefined);
     });

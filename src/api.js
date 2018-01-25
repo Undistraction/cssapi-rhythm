@@ -7,10 +7,10 @@ import {
   always,
   ifElse,
   assoc,
-  objOf,
+  pickBy,
 } from 'ramda';
 import { isUndefined, defaultWhen, isNotUndefined } from 'ramda-adjunct';
-import { outputWithUnit } from 'cssjs-units';
+import { outputWithUnit } from 'cssapi-units';
 import { joinWithSpace, reduceIndexed } from './utils';
 import {
   throwAPIVerticalRhythmError,
@@ -22,7 +22,6 @@ import {
 } from './errors';
 import validateAPIRhythmSingleArg from './validators/validateAPIRhythmSingleArg';
 import validateAPIRhythmMultiArg from './validators/validateAPIRhythmMultiArg';
-import { FIELD_NAMES } from './const';
 
 export default config => {
   const {
@@ -61,11 +60,7 @@ export default config => {
   const outputVerticalRhythm = outputRhythm(toVerticalRhythm);
   const outputHorizontalRhythm = outputRhythm(toHorizontalRhythm);
 
-  const unitToValidationObj = ifElse(
-    isNotUndefined,
-    objOf(FIELD_NAMES.UNIT),
-    always({})
-  );
+  const withoutUndefined = pickBy(isNotUndefined);
 
   const outputMultipleRhythm = (...args) => {
     switch (args.length) {
@@ -99,14 +94,14 @@ export default config => {
   };
 
   const vr = unit => {
-    validateAPIRhythmSingleArg(unitToValidationObj(unit)).orElse(
+    validateAPIRhythmSingleArg(withoutUndefined({ unit })).orElse(
       compose(throwAPIVerticalRhythmError, invalidAPIVericalRhythmMessage)
     );
     return outputVerticalRhythm(unit);
   };
 
   const hr = unit => {
-    validateAPIRhythmSingleArg(unitToValidationObj(unit)).orElse(
+    validateAPIRhythmSingleArg(withoutUndefined({ unit })).orElse(
       compose(throwAPIHorizontalRhythmError, invalidAPIHorizontalRhythmMessage)
     );
     return outputHorizontalRhythm(unit);

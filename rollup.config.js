@@ -3,10 +3,10 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 
 export default {
-  name: `cssjs-rhythm`,
+  name: `cssapi-rhythm`,
   input: `src/index.js`,
   output: {
-    file: `dist/cssjs-rhythm.js`,
+    file: `dist/cssapi-rhythm.js`,
     format: `umd`,
   },
   // Define modules that shouldn't be included in the build. It is assumed they

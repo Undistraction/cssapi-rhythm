@@ -10,7 +10,7 @@ describe(`rhythm()`, () => {
     describe(`with no args`, () => {
       it(`throws`, () => {
         expect(() => rhythm.rhythm()).toThrow(
-          `[cssjs-rhythm] rhythm() Object Invalid: Object was missing required key(s): ['arg1']`
+          `[cssapi-rhythm] rhythm() Object Invalid: Object was missing required key(s): ['arg1']`
         );
       });
     });
@@ -21,7 +21,7 @@ describe(`rhythm()`, () => {
     describe(`first arg`, () => {
       map(invalidValue => {
         expect(() => rhythm.rhythm(invalidValue)).toThrow(
-          `[cssjs-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg1': Wasn't a valid Number`
+          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg1': Wasn't a valid Number`
         );
       })(notNumberOrUndefined);
     });
@@ -29,7 +29,7 @@ describe(`rhythm()`, () => {
     describe(`second arg`, () => {
       map(invalidValue => {
         expect(() => rhythm.rhythm(1, invalidValue)).toThrow(
-          `[cssjs-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg2': Wasn't a valid Number`
+          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg2': Wasn't a valid Number`
         );
       })(notNumberOrUndefined);
     });
@@ -37,7 +37,7 @@ describe(`rhythm()`, () => {
     describe(`third arg`, () => {
       map(invalidValue => {
         expect(() => rhythm.rhythm(1, 2, invalidValue)).toThrow(
-          `[cssjs-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg3': Wasn't a valid Number`
+          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg3': Wasn't a valid Number`
         );
       })(notNumberOrUndefined);
     });
@@ -45,7 +45,7 @@ describe(`rhythm()`, () => {
     describe(`fourth arg`, () => {
       map(invalidValue => {
         expect(() => rhythm.rhythm(1, 2, 3, invalidValue)).toThrow(
-          `[cssjs-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg4': Wasn't a valid Number`
+          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg4': Wasn't a valid Number`
         );
       })(notNumberOrUndefined);
     });
@@ -53,7 +53,7 @@ describe(`rhythm()`, () => {
     describe(`unsupported fifth arg`, () => {
       map(invalidValue => {
         expect(() => rhythm.rhythm(1, 2, 3, 4, invalidValue)).toThrow(
-          `[cssjs-rhythm] rhythm() Object Invalid: Object included invalid key(s): '[arg5]'`
+          `[cssapi-rhythm] rhythm() Object Invalid: Object included invalid key(s): '[arg5]'`
         );
       })(notNumberOrUndefined);
     });

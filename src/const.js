@@ -19,7 +19,7 @@ export const FIELD_NAMES = Object.freeze({
   ARG4: `arg4`,
 });
 
-export const ERROR_PREFIX = `[cssjs-rhythm]`;
+export const ERROR_PREFIX = `[cssapi-rhythm]`;
 export const CONFIGURE_PREFIX = `configure()`;
 export const API_VERTICAL_RHYTHM_PREFIX = `verticalRhythm()`;
 export const API_HORIZONTAL_RHYTHM_PREFIX = `horizontalRhythm()`;
