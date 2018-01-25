@@ -91,6 +91,7 @@ export default config => {
         ]);
       default:
     }
+    return null;
   };
 
   const vr = unit => {

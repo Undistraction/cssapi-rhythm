@@ -9,10 +9,8 @@ import {
   flip,
   append,
   prop,
-  replace,
   addIndex,
   reduce,
-  compose,
   defaultTo,
 } from 'ramda';
 import { isArray, isString, isUndefined } from 'ramda-adjunct';
