@@ -1037,13 +1037,20 @@ cryptiles@3.x.x:
   dependencies:
     boom "5.x.x"
 
+cssapi-units@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/cssapi-units/-/cssapi-units-0.3.0.tgz#b930cd3359f9f468dcd487d449d4f3593b5a2832"
+  dependencies:
+    ramda "^0.25.0"
+    ramda-adjunct "^2.2.0"
+
 cssbeautify@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cssbeautify/-/cssbeautify-0.3.1.tgz#12dd1f734035c2e6faca67dcbdcef74e42811397"
 
-cssapi-units@^0.2.12:
+cssjs-units@^0.2.12:
   version "0.2.12"
-  resolved "https://registry.yarnpkg.com/cssapi-units/-/cssapi-units-0.2.12.tgz#2a21d1202f693d28f355064618108259e0eb19a8"
+  resolved "https://registry.yarnpkg.com/cssjs-units/-/cssjs-units-0.2.12.tgz#2a21d1202f693d28f355064618108259e0eb19a8"
   dependencies:
     ramda "^0.25.0"
     ramda-adjunct "^2.2.0"
@@ -1568,7 +1575,7 @@ folktale-validations@^0.0.43:
   version "0.0.43"
   resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.43.tgz#0a16022a3caefcf1725f169b734958eba9d2512d"
   dependencies:
-    cssapi-units "^0.2.12"
+    cssjs-units "^0.2.12"
     deep-freeze "^0.0.1"
     folktale "^2.0.1"
     ramda "^0.25.0"
