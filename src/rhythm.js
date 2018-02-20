@@ -1,18 +1,14 @@
 import { compose } from 'ramda';
-import { validateIsObject } from 'folktale-validations';
-import { throwConfigureError, invalidConfigMessage } from './errors';
-import validateConfig from './validators/validateConfig';
+import { matchWithSuccessOrFailure } from 'folktale-validations';
+import { throwConfigureError } from './errors';
+import validateConfig from './validations/validators/validateConfig';
 import api from './api';
 import { propValue } from './utils';
 
-const throwOrBuildApi = config =>
-  validateConfig(config).matchWith({
-    Success: compose(api, propValue),
-    Failure: compose(throwConfigureError, invalidConfigMessage, propValue),
-  });
-
-export default config =>
-  validateIsObject(config).matchWith({
-    Success: compose(throwOrBuildApi, propValue),
-    Failure: compose(throwConfigureError, invalidConfigMessage, propValue),
-  });
+export default compose(
+  matchWithSuccessOrFailure(
+    compose(api, propValue),
+    compose(throwConfigureError, propValue)
+  ),
+  validateConfig
+);

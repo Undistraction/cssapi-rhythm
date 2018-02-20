@@ -1,8 +1,8 @@
 import { merge } from 'ramda';
 
-const minimalValidConfig = {
+const minimumValidConfig = {
   rhythm: 20,
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const buildConfig = (config = {}) => merge(minimalValidConfig, config);
+export const buildConfig = (config = {}) => merge(minimumValidConfig, config);

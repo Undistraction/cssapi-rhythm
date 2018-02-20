@@ -14,14 +14,11 @@ import { outputWithUnit } from 'cssapi-units';
 import { joinWithSpace, reduceIndexed } from './utils';
 import {
   throwAPIVerticalRhythmError,
-  invalidAPIVericalRhythmMessage,
   throwAPIHorizontalRhythmError,
-  invalidAPIHorizontalRhythmMessage,
   throwAPIRhythmError,
-  invalidAPIRhythmMessage,
 } from './errors';
-import validateAPIRhythmSingleArg from './validators/validateAPIRhythmSingleArg';
-import validateAPIRhythmMultiArg from './validators/validateAPIRhythmMultiArg';
+import validateAPIRhythmSingleArg from './validations/validators/validateAPIRhythmSingleArg';
+import validateAPIRhythmMultiArg from './validations/validators/validateAPIRhythmMultiArg';
 
 export default config => {
   const {
@@ -96,14 +93,14 @@ export default config => {
 
   const vr = unit => {
     validateAPIRhythmSingleArg(withoutUndefined({ unit })).orElse(
-      compose(throwAPIVerticalRhythmError, invalidAPIVericalRhythmMessage)
+      throwAPIVerticalRhythmError
     );
     return outputVerticalRhythm(unit);
   };
 
   const hr = unit => {
     validateAPIRhythmSingleArg(withoutUndefined({ unit })).orElse(
-      compose(throwAPIHorizontalRhythmError, invalidAPIHorizontalRhythmMessage)
+      throwAPIHorizontalRhythmError
     );
     return outputHorizontalRhythm(unit);
   };
@@ -115,9 +112,7 @@ export default config => {
       {},
       args
     );
-    validateAPIRhythmMultiArg(o).orElse(
-      compose(throwAPIRhythmError, invalidAPIRhythmMessage)
-    );
+    validateAPIRhythmMultiArg(o).orElse(throwAPIRhythmError);
     return outputMultipleRhythm(...args);
   };
 

@@ -1,12 +1,12 @@
 import {
-  validateIsWhitelistedString,
+  validateIsWhitelistedValue,
   validateIsValidNumber,
 } from 'folktale-validations';
 import { values } from 'ramda';
-import validateIsNumberOrNumberWithPx from './validators/validateIsNumberOrNumberWithPx';
+import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
 import { UNITS, FIELD_NAMES } from './const';
-import validateConfiguredRhythm from './validators/validateConfiguredRhythm';
+import validateConfiguredRhythm from './validations/validators/validateConfiguredRhythm';
 
 const {
   ROOT_FONT_SIZE,
@@ -49,7 +49,7 @@ export const CONFIG = {
     {
       name: RENDER_UNIT,
       defaultValue: UNITS.REM,
-      validator: validateIsWhitelistedString(values(UNITS)),
+      validator: validateIsWhitelistedValue(values(UNITS)),
     },
     {
       name: OPTICAL_ADJUSTMENT,

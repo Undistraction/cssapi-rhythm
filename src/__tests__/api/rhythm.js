@@ -9,8 +9,11 @@ describe(`rhythm()`, () => {
     const rhythm = createRhythm(buildConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
-        expect(() => rhythm.rhythm()).toThrow(
-          `[cssapi-rhythm] rhythm() Object Invalid: Object was missing required key(s): ['arg1']`
+        expect(() =>
+          rhythm.rhythm()
+        ).toThrowMatchingErrorWithCompressedWhitespace(
+          `[cssapi-rhythm] rhythm() Arguments
+            – missing required key(s): ['arg1']`
         );
       });
     });
@@ -19,43 +22,71 @@ describe(`rhythm()`, () => {
   describe(`with invalid args`, () => {
     const rhythm = createRhythm(buildConfig());
     describe(`first arg`, () => {
-      map(invalidValue => {
-        expect(() => rhythm.rhythm(invalidValue)).toThrow(
-          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg1': Wasn't a valid Number`
-        );
-      })(notNumberOrUndefined);
+      it(`throws`, () => {
+        map(invalidValue => {
+          expect(() =>
+            rhythm.rhythm(invalidValue)
+          ).toThrowMatchingErrorWithCompressedWhitespace(
+            `[cssapi-rhythm] rhythm() Arguments
+              – included invalid value(s) – Key 'arg1': Wasn't Valid Number`
+          );
+        })(notNumberOrUndefined);
+      });
     });
 
     describe(`second arg`, () => {
-      map(invalidValue => {
-        expect(() => rhythm.rhythm(1, invalidValue)).toThrow(
-          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg2': Wasn't a valid Number`
-        );
-      })(notNumberOrUndefined);
+      it(`throws`, () => {
+        map(invalidValue => {
+          expect(() =>
+            rhythm.rhythm(1, invalidValue)
+          ).toThrowMatchingErrorWithCompressedWhitespace(
+            `[cssapi-rhythm] rhythm() Arguments
+              – included invalid value(s)
+                – Key 'arg2': Wasn't Valid Number`
+          );
+        })(notNumberOrUndefined);
+      });
     });
 
     describe(`third arg`, () => {
-      map(invalidValue => {
-        expect(() => rhythm.rhythm(1, 2, invalidValue)).toThrow(
-          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg3': Wasn't a valid Number`
-        );
-      })(notNumberOrUndefined);
+      it(`throws`, () => {
+        map(invalidValue => {
+          expect(() =>
+            rhythm.rhythm(1, 2, invalidValue)
+          ).toThrowMatchingErrorWithCompressedWhitespace(
+            `[cssapi-rhythm] rhythm() Arguments
+              – included invalid value(s)
+              – Key 'arg3': Wasn't Valid Number`
+          );
+        })(notNumberOrUndefined);
+      });
     });
 
     describe(`fourth arg`, () => {
-      map(invalidValue => {
-        expect(() => rhythm.rhythm(1, 2, 3, invalidValue)).toThrow(
-          `[cssapi-rhythm] rhythm() You supplied invalid Arguments: Argument 'arg4': Wasn't a valid Number`
-        );
-      })(notNumberOrUndefined);
+      it(`throws`, () => {
+        map(invalidValue => {
+          expect(() =>
+            rhythm.rhythm(1, 2, 3, invalidValue)
+          ).toThrowMatchingErrorWithCompressedWhitespace(
+            `[cssapi-rhythm] rhythm() Arguments
+              – included invalid value(s)
+              – Key 'arg4': Wasn't Valid Number`
+          );
+        })(notNumberOrUndefined);
+      });
     });
 
     describe(`unsupported fifth arg`, () => {
-      map(invalidValue => {
-        expect(() => rhythm.rhythm(1, 2, 3, 4, invalidValue)).toThrow(
-          `[cssapi-rhythm] rhythm() Object Invalid: Object included invalid key(s): '[arg5]'`
-        );
-      })(notNumberOrUndefined);
+      it(`throws`, () => {
+        map(invalidValue => {
+          expect(() =>
+            rhythm.rhythm(1, 2, 3, 4, invalidValue)
+          ).toThrowMatchingErrorWithCompressedWhitespace(
+            `[cssapi-rhythm] rhythm() Arguments
+              – included key(s) not on whitelist: ['arg1', 'arg2', 'arg3', 'arg4']`
+          );
+        })(notNumberOrUndefined);
+      });
     });
   });
 

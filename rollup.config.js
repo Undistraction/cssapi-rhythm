@@ -39,7 +39,7 @@ export default {
         'node_modules/folktale-validations/lib/index.js': [
           `validateIsObject`,
           `validateObjectWithConstraints`,
-          `validateIsWhitelistedString`,
+          `validateIsWhitelistedValue`,
           `validateIsValidNumber`,
           `orValidator`,
           `numberWithUnitValidator`,

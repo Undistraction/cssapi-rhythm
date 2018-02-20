@@ -7,7 +7,7 @@ describe(`configuration rhythm()`, () => {
   describe(`with no config`, () => {
     it(`throws`, () => {
       expect(() => createRhythm()).toThrow(
-        `The config object was invalid: Wasn't type: 'Object'`
+        `[cssapi-rhythm] configure::config Wasn't Plain Object`
       );
     });
   });
@@ -16,7 +16,7 @@ describe(`configuration rhythm()`, () => {
     it(`throws`, () => {
       map(invalidValue => {
         expect(() => createRhythm(invalidValue)).toThrow(
-          `The config object was invalid: Wasn't type: 'Object'`
+          `[cssapi-rhythm] configure::config Wasn't Plain Object`
         );
       }, notObject);
     });
@@ -25,17 +25,25 @@ describe(`configuration rhythm()`, () => {
   describe(`with invalid config param names`, () => {
     it(`throws`, () => {
       const value = buildConfig({ a: 1, b: 2 });
-      expect(() => createRhythm(value)).toThrow(
-        `The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]`
+      expect(() =>
+        createRhythm(value)
+      ).toThrowMatchingErrorWithCompressedWhitespace(
+        `[cssapi-rhythm] configure::config Object
+          – included key(s) not on whitelist: ['rootFontSize', 'rhythm', 'horizontalRhythm', 'verticalRhythm', 'renderUnit', 'opticalAdjustment']`
       );
     });
   });
 
   describe(`with invalid config param values`, () => {
     it(`throws`, () => {
-      const value = { renderUnit: `100%`, rhythm: `x` };
-      expect(() => createRhythm(value)).toThrow(
-        `The config object was invalid: Object Invalid: Object included invalid values(s): Key 'renderUnit': Value wasn't one of the accepted values: rem, em, px, Key 'rhythm': Wasn't a valid Number and Wasn't number with unit: 'px'`
+      const value = { renderUnit: `a`, rhythm: `b` };
+      expect(() =>
+        createRhythm(value)
+      ).toThrowMatchingErrorWithCompressedWhitespace(
+        `[cssapi-rhythm] configure::config Object 
+          – included invalid value(s)
+            – Key 'renderUnit': Value wasn't on the whitelist: ['rem', 'em', 'px']
+            – Key 'rhythm': Wasn't Valid Number or Wasn't number with unit: 'px'`
       );
     });
   });
@@ -43,16 +51,22 @@ describe(`configuration rhythm()`, () => {
   describe(`combinations of 'rhythm', 'horizontalRhythm', 'verticalRhythm' and 'opticalAdjustment'`, () => {
     describe(`with only 'horizontalRhythm' set`, () => {
       it(`throws`, () => {
-        expect(() => createRhythm({ horizontalRhythm: 20 })).toThrow(
-          `The config object was invalid: Object Invalid: You must supply either a 'rhythm' or both a 'horizontalRhythm' and a 'verticalRhythm'`
+        expect(() =>
+          createRhythm({ horizontalRhythm: 20 })
+        ).toThrowMatchingErrorWithCompressedWhitespace(
+          `[cssapi-rhythm] configure::config Object
+            – You must supply either a 'rhythm' or both 'hRhythm' and 'vRhythm' values`
         );
       });
     });
 
     describe(`with only 'verticalRhythm' set`, () => {
       it(`throws`, () => {
-        expect(() => createRhythm({ verticalRhythm: 20 })).toThrow(
-          `The config object was invalid: Object Invalid: You must supply either a 'rhythm' or both a 'horizontalRhythm' and a 'verticalRhythm'`
+        expect(() =>
+          createRhythm({ verticalRhythm: 20 })
+        ).toThrowMatchingErrorWithCompressedWhitespace(
+          `[cssapi-rhythm] configure::config Object
+            – You must supply either a 'rhythm' or both 'hRhythm' and 'vRhythm' values`
         );
       });
     });

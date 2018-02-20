@@ -9,7 +9,9 @@ describe(`verticalRhythm()`, () => {
     const rhythm = createRhythm(buildConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
-        expect(() => rhythm.verticalRhythm()).toThrow(
+        expect(() =>
+          rhythm.verticalRhythm()
+        ).toThrowMatchingErrorWithCompressedWhitespace(
           `[cssapi-rhythm] verticalRhythm() Object Invalid: Object was missing required key(s): ['unit']`
         );
       });
@@ -20,8 +22,11 @@ describe(`verticalRhythm()`, () => {
     const rhythm = createRhythm(buildConfig());
     describe.only(`with invalid arg 'unit'`, () => {
       map(invalidValue => {
-        expect(() => rhythm.verticalRhythm(invalidValue)).toThrow(
-          `[cssapi-rhythm] verticalRhythm() You supplied invalid Arguments: Argument 'unit': Wasn't a valid Number`
+        expect(() =>
+          rhythm.verticalRhythm(invalidValue)
+        ).toThrowMatchingErrorWithCompressedWhitespace(
+          `[cssapi-rhythm] verticalRhythm() Arguments
+            – included invalid value(s) – Key 'unit': Wasn't Valid Number`
         );
       })(notNumberOrUndefined);
     });

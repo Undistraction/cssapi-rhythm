@@ -7,4 +7,6 @@ module.exports = {
   coverageReporters: [`json`],
   setupFiles: [],
   modulePathIgnorePatterns: [`testHelpers/`],
+  setupTestFrameworkScriptFile: `<rootDir>/src/__tests__/testHelpers/matchers/customMatchers.js`,
+  unmockedModulePathPatterns: [`jasmine-expect`],
 };

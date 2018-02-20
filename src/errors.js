@@ -1,5 +1,8 @@
-import { compose, replace } from 'ramda';
-import { joinWithComma, joinWithSpace, appendTo } from './utils';
+import { compose, construct } from 'ramda';
+import { configureRenderers } from 'folktale-validations';
+import { appendFlipped } from 'ramda-adjunct';
+import { joinWithSpace } from './utils';
+import validatorMessages from './validations/validatorMessages';
 import {
   ERROR_PREFIX,
   CONFIGURE_PREFIX,
@@ -8,53 +11,48 @@ import {
   API_RHYTHM_PREFIX,
 } from './const';
 
+const { failureRenderer, argumentsFailureRenderer } = configureRenderers({
+  validatorMessages,
+});
+
 // -----------------------------------------------------------------------------
 // Utils
 // -----------------------------------------------------------------------------
 
-const throwError = message => {
-  throw new Error(joinWithSpace([ERROR_PREFIX, message]));
+const constructError = construct(Error);
+
+const throwError = error => {
+  throw error;
 };
 
-const throwPrefixedError = prefix =>
-  compose(throwError, joinWithSpace, appendTo([prefix]));
+const throwNewError = compose(throwError, constructError);
+
+const throwErrorWithMessage = compose(
+  throwNewError,
+  joinWithSpace,
+  appendFlipped([ERROR_PREFIX])
+);
+
+const throwErrorWithPrefixedMessage = prefix =>
+  compose(throwErrorWithMessage, joinWithSpace, appendFlipped([prefix]));
 
 // -----------------------------------------------------------------------------
 // Prefixed Errors
 // -----------------------------------------------------------------------------
 
-export const throwConfigureError = throwPrefixedError(CONFIGURE_PREFIX);
-export const throwAPIVerticalRhythmError = throwPrefixedError(
-  API_VERTICAL_RHYTHM_PREFIX
+export const throwConfigureError = compose(
+  throwErrorWithPrefixedMessage(CONFIGURE_PREFIX),
+  failureRenderer
 );
-export const throwAPIHorizontalRhythmError = throwPrefixedError(
-  API_HORIZONTAL_RHYTHM_PREFIX
+export const throwAPIVerticalRhythmError = compose(
+  throwErrorWithPrefixedMessage(API_VERTICAL_RHYTHM_PREFIX),
+  argumentsFailureRenderer
 );
-export const throwAPIRhythmError = throwPrefixedError(API_RHYTHM_PREFIX);
-
-// -----------------------------------------------------------------------------
-// Messages
-// -----------------------------------------------------------------------------
-
-export const invalidConfigMessage = validationErrors =>
-  `The config object was invalid: ${joinWithComma(validationErrors)}`;
-
-export const invalidAPIVericalRhythmMessage = joinWithComma;
-export const invalidAPIHorizontalRhythmMessage = joinWithComma;
-export const invalidAPIRhythmMessage = joinWithComma;
-
-// -----------------------------------------------------------------------------
-// Validation Replacement
-// -----------------------------------------------------------------------------
-
-const replaceValidationMessagePrefix = replace(
-  `Object Invalid: Object included invalid values(s)`,
-  `You supplied invalid Arguments`
+export const throwAPIHorizontalRhythmError = compose(
+  throwErrorWithPrefixedMessage(API_HORIZONTAL_RHYTHM_PREFIX),
+  argumentsFailureRenderer
 );
-
-const replaceValidationMessageKey = replace(/Key /g, `Argument `);
-
-export const replaceValidationMessage = compose(
-  replaceValidationMessagePrefix,
-  replaceValidationMessageKey
+export const throwAPIRhythmError = compose(
+  throwErrorWithPrefixedMessage(API_RHYTHM_PREFIX),
+  argumentsFailureRenderer
 );

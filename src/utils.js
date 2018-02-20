@@ -1,4 +1,5 @@
 import {
+  compose,
   join,
   equals,
   complement,
@@ -6,14 +7,14 @@ import {
   both,
   anyPass,
   reject,
-  flip,
-  append,
   prop,
   addIndex,
   reduce,
   defaultTo,
+  isNil,
 } from 'ramda';
-import { isArray, isString, isUndefined } from 'ramda-adjunct';
+import { isArray, isString, isUndefined, appendFlipped } from 'ramda-adjunct';
+import { VALIDATOR_UID_PREFIX } from './const';
 
 // -----------------------------------------------------------------------------
 // Predicates
@@ -27,15 +28,14 @@ export const isEmptyString = both(isString, isEmpty);
 // -----------------------------------------------------------------------------
 
 export const joinDefined = s => v => {
-  const remaining = reject(anyPass([isEmptyString, isEmptyArray, isUndefined]))(
-    v
-  );
-  const result = join(s, remaining);
-  return result;
+  const remaining = reject(anyPass([isNil, isEmptyArray, isUndefined]))(v);
+  return join(s, remaining);
 };
 
 export const joinWithComma = joinDefined(`, `);
+export const joinWithColon = joinDefined(`: `);
 export const joinWithSpace = joinDefined(` `);
+export const joinWithFullStop = joinDefined(`.`);
 
 // -----------------------------------------------------------------------------
 // Predicates
@@ -48,7 +48,6 @@ export const isNotZero = complement(isZero);
 // Lists
 // -----------------------------------------------------------------------------
 
-export const appendTo = flip(append);
 export const reduceIndexed = addIndex(reduce);
 
 // -----------------------------------------------------------------------------
@@ -58,3 +57,12 @@ export const reduceIndexed = addIndex(reduce);
 export const propValue = prop(`value`);
 
 export const defaultToEmptyObj = defaultTo({});
+
+// -----------------------------------------------------------------------------
+// Validations
+// -----------------------------------------------------------------------------
+
+export const toUID = compose(
+  joinWithFullStop,
+  appendFlipped(VALIDATOR_UID_PREFIX)
+);
