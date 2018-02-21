@@ -12,7 +12,7 @@ describe(`verticalRhythm()`, () => {
         expect(() =>
           rhythm.verticalRhythm()
         ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] verticalRhythm() Object Invalid: Object was missing required key(s): ['unit']`
+          `[cssapi-rhythm] verticalRhythm() Arguments missing required key(s): ['unit']`
         );
       });
     });
@@ -25,8 +25,7 @@ describe(`verticalRhythm()`, () => {
         expect(() =>
           rhythm.verticalRhythm(invalidValue)
         ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] verticalRhythm() Arguments
-            – included invalid value(s) – Key 'unit': Wasn't Valid Number`
+          `[cssapi-rhythm] verticalRhythm() Arguments included invalid value(s) – Key 'unit': Wasn't Valid Number`
         );
       })(notNumberOrUndefined);
     });

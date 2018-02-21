@@ -11,7 +11,7 @@ import {
   API_RHYTHM_PREFIX,
 } from './const';
 
-const { failureRenderer, argumentsFailureRenderer } = configureRenderers({
+const { argumentsFailureRenderer } = configureRenderers({
   validatorMessages,
 });
 
@@ -42,7 +42,7 @@ const throwErrorWithPrefixedMessage = prefix =>
 
 export const throwConfigureError = compose(
   throwErrorWithPrefixedMessage(CONFIGURE_PREFIX),
-  failureRenderer
+  argumentsFailureRenderer
 );
 export const throwAPIVerticalRhythmError = compose(
   throwErrorWithPrefixedMessage(API_VERTICAL_RHYTHM_PREFIX),

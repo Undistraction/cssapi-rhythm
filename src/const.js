@@ -20,7 +20,7 @@ export const FIELD_NAMES = Object.freeze({
 });
 
 export const ERROR_PREFIX = `[cssapi-rhythm]`;
-export const CONFIGURE_PREFIX = `configure::config`;
+export const CONFIGURE_PREFIX = `configure()`;
 export const API_VERTICAL_RHYTHM_PREFIX = `verticalRhythm()`;
 export const API_HORIZONTAL_RHYTHM_PREFIX = `horizontalRhythm()`;
 export const API_RHYTHM_PREFIX = `rhythm()`;

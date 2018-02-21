@@ -12,8 +12,15 @@ import {
   reduce,
   defaultTo,
   isNil,
+  pickBy,
 } from 'ramda';
-import { isArray, isString, isUndefined, appendFlipped } from 'ramda-adjunct';
+import {
+  isArray,
+  isString,
+  isUndefined,
+  appendFlipped,
+  isNotUndefined,
+} from 'ramda-adjunct';
 import { VALIDATOR_UID_PREFIX } from './const';
 
 // -----------------------------------------------------------------------------
@@ -66,3 +73,9 @@ export const toUID = compose(
   joinWithFullStop,
   appendFlipped(VALIDATOR_UID_PREFIX)
 );
+
+// ---------------------------------------------------------------------------
+// Other
+// ---------------------------------------------------------------------------
+
+export const pickIsNotUndefined = pickBy(isNotUndefined);

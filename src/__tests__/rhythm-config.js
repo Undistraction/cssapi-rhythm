@@ -1,13 +1,13 @@
 import { map } from 'ramda';
 import createRhythm from '../index';
 import { buildConfig } from './testHelpers/factories';
-import { notObject } from './testHelpers/fixtures';
+import { notObjectOrUndefined } from './testHelpers/fixtures';
 
 describe(`configuration rhythm()`, () => {
   describe(`with no config`, () => {
     it(`throws`, () => {
-      expect(() => createRhythm()).toThrow(
-        `[cssapi-rhythm] configure::config Wasn't Plain Object`
+      expect(() => createRhythm()).toThrowMatchingErrorWithCompressedWhitespace(
+        `[cssapi-rhythm] configure() Arguments missing required key(s): ['config']`
       );
     });
   });
@@ -15,10 +15,13 @@ describe(`configuration rhythm()`, () => {
   describe(`with an non-object`, () => {
     it(`throws`, () => {
       map(invalidValue => {
-        expect(() => createRhythm(invalidValue)).toThrow(
-          `[cssapi-rhythm] configure::config Wasn't Plain Object`
+        expect(() =>
+          createRhythm(invalidValue)
+        ).toThrowMatchingErrorWithCompressedWhitespace(
+          `[cssapi-rhythm] configure() Arguments included invalid value(s)
+          – Key 'config': Wasn't Plain Object`
         );
-      }, notObject);
+      }, notObjectOrUndefined);
     });
   });
 
@@ -28,8 +31,8 @@ describe(`configuration rhythm()`, () => {
       expect(() =>
         createRhythm(value)
       ).toThrowMatchingErrorWithCompressedWhitespace(
-        `[cssapi-rhythm] configure::config Object
-          – included key(s) not on whitelist: ['rootFontSize', 'rhythm', 'horizontalRhythm', 'verticalRhythm', 'renderUnit', 'opticalAdjustment']`
+        `[cssapi-rhythm] configure() Arguments included invalid value(s)
+            – Key 'config': Object included key(s) not on whitelist: ['rootFontSize', 'rhythm', 'horizontalRhythm', 'verticalRhythm', 'renderUnit', 'opticalAdjustment']`
       );
     });
   });
@@ -40,9 +43,9 @@ describe(`configuration rhythm()`, () => {
       expect(() =>
         createRhythm(value)
       ).toThrowMatchingErrorWithCompressedWhitespace(
-        `[cssapi-rhythm] configure::config Object 
-          – included invalid value(s)
-            – Key 'renderUnit': Value wasn't on the whitelist: ['rem', 'em', 'px']
+        `[cssapi-rhythm] configure() Arguments included invalid value(s) 
+          – Key 'config': Object included invalid value(s) 
+            – Key 'renderUnit': Value wasn't on the whitelist: ['rem', 'em', 'px'] 
             – Key 'rhythm': Wasn't Valid Number or Wasn't number with unit: 'px'`
       );
     });
@@ -54,8 +57,8 @@ describe(`configuration rhythm()`, () => {
         expect(() =>
           createRhythm({ horizontalRhythm: 20 })
         ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] configure::config Object
-            – You must supply either a 'rhythm' or both 'hRhythm' and 'vRhythm' values`
+          `[cssapi-rhythm] configure() Arguments included invalid value(s)
+            – Key 'config': Object must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`
         );
       });
     });
@@ -65,8 +68,8 @@ describe(`configuration rhythm()`, () => {
         expect(() =>
           createRhythm({ verticalRhythm: 20 })
         ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] configure::config Object
-            – You must supply either a 'rhythm' or both 'hRhythm' and 'vRhythm' values`
+          `[cssapi-rhythm] configure() Arguments included invalid value(s)
+            – Key 'config': Object must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`
         );
       });
     });

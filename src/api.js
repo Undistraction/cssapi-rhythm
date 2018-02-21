@@ -11,7 +11,7 @@ import {
 } from 'ramda';
 import { isUndefined, defaultWhen, isNotUndefined } from 'ramda-adjunct';
 import { outputWithUnit } from 'cssapi-units';
-import { joinWithSpace, reduceIndexed } from './utils';
+import { joinWithSpace, reduceIndexed, pickIsNotUndefined } from './utils';
 import {
   throwAPIVerticalRhythmError,
   throwAPIHorizontalRhythmError,
@@ -57,8 +57,6 @@ export default config => {
   const outputVerticalRhythm = outputRhythm(toVerticalRhythm);
   const outputHorizontalRhythm = outputRhythm(toHorizontalRhythm);
 
-  const withoutUndefined = pickBy(isNotUndefined);
-
   const outputMultipleRhythm = (...args) => {
     switch (args.length) {
       case 1:
@@ -92,14 +90,14 @@ export default config => {
   };
 
   const vr = unit => {
-    validateAPIRhythmSingleArg(withoutUndefined({ unit })).orElse(
+    validateAPIRhythmSingleArg(pickIsNotUndefined({ unit })).orElse(
       throwAPIVerticalRhythmError
     );
     return outputVerticalRhythm(unit);
   };
 
   const hr = unit => {
-    validateAPIRhythmSingleArg(withoutUndefined({ unit })).orElse(
+    validateAPIRhythmSingleArg(pickIsNotUndefined({ unit })).orElse(
       throwAPIHorizontalRhythmError
     );
     return outputHorizontalRhythm(unit);

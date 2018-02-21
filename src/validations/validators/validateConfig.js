@@ -1,4 +1,4 @@
 import { validateObjectWithConstraints } from 'folktale-validations';
-import { CONFIG } from '../../constraints';
+import { RHYTHM_ARGS } from '../../constraints';
 
-export default o => validateObjectWithConstraints(CONFIG, o);
+export default validateObjectWithConstraints(RHYTHM_ARGS);

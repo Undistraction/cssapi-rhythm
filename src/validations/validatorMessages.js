@@ -5,7 +5,7 @@ const { VALIDATE_CONFIGURED_RHYTHM } = validatorUids;
 
 const messages = {
   [VALIDATE_CONFIGURED_RHYTHM]: always(
-    `You must supply either a 'rhythm' or both 'hRhythm' and 'vRhythm' values`
+    `must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`
   ),
 };
 

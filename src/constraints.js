@@ -1,8 +1,9 @@
+import { values } from 'ramda';
 import {
   validateIsWhitelistedValue,
   validateIsValidNumber,
+  validateIsPlainObject,
 } from 'folktale-validations';
-import { values } from 'ramda';
 import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
 import { UNITS, FIELD_NAMES } from './const';
@@ -55,6 +56,17 @@ export const CONFIG = {
       name: OPTICAL_ADJUSTMENT,
       defaultValue: 0,
       validator: validateIsValidNumber,
+    },
+  ],
+};
+
+export const RHYTHM_ARGS = {
+  fields: [
+    {
+      name: `config`,
+      validator: validateIsPlainObject,
+      isRequired: true,
+      value: CONFIG,
     },
   ],
 };
