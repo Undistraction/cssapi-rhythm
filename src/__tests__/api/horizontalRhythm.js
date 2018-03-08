@@ -9,11 +9,8 @@ describe(`horizontalRhythm()`, () => {
     const rhythm = createRhythm(buildConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
-        expect(() =>
-          rhythm.horizontalRhythm()
-        ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] horizontalRhythm() Arguments missing required key(s): ['unit']`
-        );
+        expect(() => rhythm.horizontalRhythm()).toThrowMultiline(`
+          [cssapi-rhythm] horizontalRhythm() Arguments missing required key(s): ['unit']`);
       });
     });
   });
@@ -23,11 +20,9 @@ describe(`horizontalRhythm()`, () => {
     describe(`with invalid arg 'units'`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() =>
-            rhythm.horizontalRhythm(invalidValue)
-          ).toThrowMatchingErrorWithCompressedWhitespace(
-            `[cssapi-rhythm] horizontalRhythm() Arguments included invalid value(s) – Key 'unit': Wasn't Valid Number`
-          );
+          expect(() => rhythm.horizontalRhythm(invalidValue)).toThrowMultiline(`
+          [cssapi-rhythm] horizontalRhythm() Arguments included invalid value(s)
+            – Key 'unit': Wasn't Valid Number`);
         })(notNumberOrUndefined);
       });
     });

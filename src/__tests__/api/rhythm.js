@@ -9,11 +9,8 @@ describe(`rhythm()`, () => {
     const rhythm = createRhythm(buildConfig());
     describe(`with no args`, () => {
       it(`throws`, () => {
-        expect(() =>
-          rhythm.rhythm()
-        ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] rhythm() Arguments missing required key(s): ['arg1']`
-        );
+        expect(() => rhythm.rhythm()).toThrowMultiline(`
+        [cssapi-rhythm] rhythm() Arguments missing required key(s): ['arg1']`);
       });
     });
   });
@@ -23,12 +20,9 @@ describe(`rhythm()`, () => {
     describe(`first arg`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() =>
-            rhythm.rhythm(invalidValue)
-          ).toThrowMatchingErrorWithCompressedWhitespace(
-            `[cssapi-rhythm] rhythm() Arguments included invalid value(s)
-              – Key 'arg1': Wasn't Valid Number`
-          );
+          expect(() => rhythm.rhythm(invalidValue)).toThrowMultiline(`
+          [cssapi-rhythm] rhythm() Arguments included invalid value(s)
+            – Key 'arg1': Wasn't Valid Number`);
         })(notNumberOrUndefined);
       });
     });
@@ -36,12 +30,9 @@ describe(`rhythm()`, () => {
     describe(`second arg`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() =>
-            rhythm.rhythm(1, invalidValue)
-          ).toThrowMatchingErrorWithCompressedWhitespace(
-            `[cssapi-rhythm] rhythm() Arguments included invalid value(s)
-              – Key 'arg2': Wasn't Valid Number`
-          );
+          expect(() => rhythm.rhythm(1, invalidValue)).toThrowMultiline(`
+          [cssapi-rhythm] rhythm() Arguments included invalid value(s)
+            – Key 'arg2': Wasn't Valid Number`);
         })(notNumberOrUndefined);
       });
     });
@@ -49,12 +40,9 @@ describe(`rhythm()`, () => {
     describe(`third arg`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() =>
-            rhythm.rhythm(1, 2, invalidValue)
-          ).toThrowMatchingErrorWithCompressedWhitespace(
-            `[cssapi-rhythm] rhythm() Arguments included invalid value(s)
-              – Key 'arg3': Wasn't Valid Number`
-          );
+          expect(() => rhythm.rhythm(1, 2, invalidValue)).toThrowMultiline(`
+          [cssapi-rhythm] rhythm() Arguments included invalid value(s)
+            – Key 'arg3': Wasn't Valid Number`);
         })(notNumberOrUndefined);
       });
     });
@@ -62,12 +50,9 @@ describe(`rhythm()`, () => {
     describe(`fourth arg`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() =>
-            rhythm.rhythm(1, 2, 3, invalidValue)
-          ).toThrowMatchingErrorWithCompressedWhitespace(
-            `[cssapi-rhythm] rhythm() Arguments included invalid value(s)
-              – Key 'arg4': Wasn't Valid Number`
-          );
+          expect(() => rhythm.rhythm(1, 2, 3, invalidValue)).toThrowMultiline(`
+          [cssapi-rhythm] rhythm() Arguments included invalid value(s)
+            – Key 'arg4': Wasn't Valid Number`);
         })(notNumberOrUndefined);
       });
     });
@@ -75,11 +60,9 @@ describe(`rhythm()`, () => {
     describe(`unsupported fifth arg`, () => {
       it(`throws`, () => {
         map(invalidValue => {
-          expect(() =>
-            rhythm.rhythm(1, 2, 3, 4, invalidValue)
-          ).toThrowMatchingErrorWithCompressedWhitespace(
-            `[cssapi-rhythm] rhythm() Arguments included key(s) not on whitelist: ['arg1', 'arg2', 'arg3', 'arg4']`
-          );
+          expect(() => rhythm.rhythm(1, 2, 3, 4, invalidValue))
+            .toThrowMultiline(`
+          [cssapi-rhythm] rhythm() Arguments included key(s) not on whitelist: ['arg1', 'arg2', 'arg3', 'arg4']`);
         })(notNumberOrUndefined);
       });
     });

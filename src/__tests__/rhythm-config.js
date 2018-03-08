@@ -6,21 +6,17 @@ import { notObjectOrUndefined } from './testHelpers/fixtures';
 describe(`configuration rhythm()`, () => {
   describe(`with no config`, () => {
     it(`throws`, () => {
-      expect(() => createRhythm()).toThrowMatchingErrorWithCompressedWhitespace(
-        `[cssapi-rhythm] configure() Arguments missing required key(s): ['config']`
-      );
+      expect(() => createRhythm()).toThrowMultiline(`
+        [cssapi-rhythm] configure() Arguments missing required key(s): ['config']`);
     });
   });
 
   describe(`with an non-object`, () => {
     it(`throws`, () => {
       map(invalidValue => {
-        expect(() =>
-          createRhythm(invalidValue)
-        ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] configure() Arguments included invalid value(s)
-          – Key 'config': Wasn't Plain Object`
-        );
+        expect(() => createRhythm(invalidValue)).toThrowMultiline(`
+        [cssapi-rhythm] configure() Arguments included invalid value(s)
+          – Key 'config': Wasn't Plain Object`);
       }, notObjectOrUndefined);
     });
   });
@@ -28,49 +24,37 @@ describe(`configuration rhythm()`, () => {
   describe(`with invalid config param names`, () => {
     it(`throws`, () => {
       const value = buildConfig({ a: 1, b: 2 });
-      expect(() =>
-        createRhythm(value)
-      ).toThrowMatchingErrorWithCompressedWhitespace(
-        `[cssapi-rhythm] configure() Arguments included invalid value(s)
-            – Key 'config': Object included key(s) not on whitelist: ['rootFontSize', 'rhythm', 'horizontalRhythm', 'verticalRhythm', 'renderUnit', 'opticalAdjustment']`
-      );
+      expect(() => createRhythm(value)).toThrowMultiline(`
+        [cssapi-rhythm] configure() Arguments included invalid value(s)
+          – Key 'config': Object included key(s) not on whitelist: ['rootFontSize', 'rhythm', 'horizontalRhythm', 'verticalRhythm', 'renderUnit', 'opticalAdjustment']`);
     });
   });
 
   describe(`with invalid config param values`, () => {
     it(`throws`, () => {
       const value = { renderUnit: `a`, rhythm: `b` };
-      expect(() =>
-        createRhythm(value)
-      ).toThrowMatchingErrorWithCompressedWhitespace(
-        `[cssapi-rhythm] configure() Arguments included invalid value(s) 
-          – Key 'config': Object included invalid value(s) 
-            – Key 'renderUnit': Value wasn't on the whitelist: ['rem', 'em', 'px'] 
-            – Key 'rhythm': Wasn't Valid Number or Wasn't number with unit: 'px'`
-      );
+      expect(() => createRhythm(value)).toThrowMultiline(`
+        [cssapi-rhythm] configure() Arguments included invalid value(s)
+          – Key 'config': Object included invalid value(s)
+            – Key 'renderUnit': Value wasn't on the whitelist: ['rem', 'em', 'px']
+            – Key 'rhythm': Wasn't Valid Number or Wasn't number with unit: 'px'`);
     });
   });
 
   describe(`combinations of 'rhythm', 'horizontalRhythm', 'verticalRhythm' and 'opticalAdjustment'`, () => {
     describe(`with only 'horizontalRhythm' set`, () => {
       it(`throws`, () => {
-        expect(() =>
-          createRhythm({ horizontalRhythm: 20 })
-        ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] configure() Arguments included invalid value(s)
-            – Key 'config': Object must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`
-        );
+        expect(() => createRhythm({ horizontalRhythm: 20 })).toThrowMultiline(`
+        [cssapi-rhythm] configure() Arguments included invalid value(s)
+          – Key 'config': Object must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`);
       });
     });
 
     describe(`with only 'verticalRhythm' set`, () => {
       it(`throws`, () => {
-        expect(() =>
-          createRhythm({ verticalRhythm: 20 })
-        ).toThrowMatchingErrorWithCompressedWhitespace(
-          `[cssapi-rhythm] configure() Arguments included invalid value(s)
-            – Key 'config': Object must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`
-        );
+        expect(() => createRhythm({ verticalRhythm: 20 })).toThrowMultiline(`
+        [cssapi-rhythm] configure() Arguments included invalid value(s)
+          – Key 'config': Object must include either a 'rhythm' or both 'hRhythm' and 'vRhythm' value`);
       });
     });
 

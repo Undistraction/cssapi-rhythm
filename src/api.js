@@ -7,9 +7,8 @@ import {
   always,
   ifElse,
   assoc,
-  pickBy,
 } from 'ramda';
-import { isUndefined, defaultWhen, isNotUndefined } from 'ramda-adjunct';
+import { isUndefined, defaultWhen } from 'ramda-adjunct';
 import { outputWithUnit } from 'cssapi-units';
 import { joinWithSpace, reduceIndexed, pickIsNotUndefined } from './utils';
 import {
