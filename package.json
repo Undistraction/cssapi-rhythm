@@ -21,13 +21,15 @@
     "build:lib": "babel --out-dir lib --ignore \"__tests__\" src",
     "test": "jest --watch",
     "test:noWatch": "jest",
-    "prepublishOnly": "npm run build",
     "publish:patch": "npm version patch && sudo npm publish",
     "publish:minor": "npm version minor && sudo npm publish",
     "publish:major": "npm version major && sudo npm publish",
+    "verify": "npm run lint && npm run test:noWatch && npm run build",
+    "prepublishOnly": "npm run verify",
     "lint": "eslint src",
     "audit:packages": "yarn outdated || true",
-    "test:cov": "open coverage/index.html"
+    "test:cov": "open coverage/index.html",
+    "securityCheck": "nsp check"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -51,10 +53,6 @@
     "jasmine-multiline-matchers": "^0.2.0",
     "jest": "^21.2.1",
     "prettier": "^1.8.2",
-    "rollup": "^0.51.3",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-node-resolve": "^3.0.0",
     "safe-json-stringify": "^1.0.4"
   },
   "dependencies": {
@@ -63,5 +61,11 @@
     "folktale-validations": "2.2.1",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run verify"
+    }
   }
 }
