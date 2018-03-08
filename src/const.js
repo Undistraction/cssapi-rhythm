@@ -26,3 +26,7 @@ export const API_HORIZONTAL_RHYTHM_PREFIX = `horizontalRhythm()`;
 export const API_RHYTHM_PREFIX = `rhythm()`;
 
 export const VALIDATOR_UID_PREFIX = `cssapi-rhythm`;
+
+export const CONFIGURATION_ARG_NAMES = Object.freeze({
+  CONFIG: `config`,
+});
