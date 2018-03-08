@@ -71,7 +71,7 @@ export const RHYTHM_ARGS = {
   ],
 };
 
-export const API_VERTICAL_RHYTHM = {
+export const API_VERTICAL_RHYTHM_ARGS = {
   fields: [
     {
       name: UNIT,
@@ -81,7 +81,7 @@ export const API_VERTICAL_RHYTHM = {
   ],
 };
 
-export const API_HORIZONTAL_RHYTHM = {
+export const API_HORIZONTAL_RHYTHM_ARGS = {
   fields: [
     {
       name: UNIT,
@@ -91,7 +91,7 @@ export const API_HORIZONTAL_RHYTHM = {
   ],
 };
 
-export const API_RHYTHM = {
+export const API_RHYTHM_ARGS = {
   fields: [
     {
       name: ARG1,

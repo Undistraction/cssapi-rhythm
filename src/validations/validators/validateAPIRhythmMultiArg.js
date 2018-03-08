@@ -1,4 +1,4 @@
 import { validateObjectWithConstraints } from 'folktale-validations';
-import { API_RHYTHM } from '../../constraints';
+import { API_RHYTHM_ARGS } from '../../constraints';
 
-export default validateObjectWithConstraints(API_RHYTHM);
+export default validateObjectWithConstraints(API_RHYTHM_ARGS);
