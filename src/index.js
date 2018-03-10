@@ -1,3 +1,3 @@
-import rhythm from './rhythm';
+import rhythm from './rhythm'
 
-export default rhythm;
+export default rhythm

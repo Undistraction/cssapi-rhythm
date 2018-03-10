@@ -7,17 +7,17 @@ import {
   always,
   ifElse,
   assoc,
-} from 'ramda';
-import { isUndefined, defaultWhen } from 'ramda-adjunct';
-import { outputWithUnit } from 'cssapi-units';
-import { joinWithSpace, reduceIndexed, pickIsNotUndefined } from './utils';
+} from 'ramda'
+import { isUndefined, defaultWhen } from 'ramda-adjunct'
+import { outputWithUnit } from 'cssapi-units'
+import { joinWithSpace, reduceIndexed, pickIsNotUndefined } from './utils'
 import {
   throwAPIVerticalRhythmError,
   throwAPIHorizontalRhythmError,
   throwAPIRhythmError,
-} from './errors';
-import validateAPIRhythmSingleArg from './validations/validators/validateAPIRhythmSingleArg';
-import validateAPIRhythmMultiArg from './validations/validators/validateAPIRhythmMultiArg';
+} from './errors'
+import validateAPIRhythmSingleArg from './validations/validators/validateAPIRhythmSingleArg'
+import validateAPIRhythmMultiArg from './validations/validators/validateAPIRhythmMultiArg'
 
 export default config => {
   const {
@@ -27,13 +27,13 @@ export default config => {
     renderUnit,
     verticalRhythm,
     horizontalRhythm,
-  } = config;
+  } = config
 
-  const opticallyAdjustRhythm = multiply(subtract(1, opticalAdjustment));
+  const opticallyAdjustRhythm = multiply(subtract(1, opticalAdjustment))
 
   const resolvedVerticalRhythm = isUndefined(verticalRhythm)
     ? rhythm
-    : verticalRhythm;
+    : verticalRhythm
 
   const resolvedHorizontalRhythm = defaultWhen(
     isUndefined,
@@ -41,20 +41,20 @@ export default config => {
       verticalRhythm
     ),
     horizontalRhythm
-  );
+  )
 
   const hasUnifiedRhythm = equals(
     resolvedVerticalRhythm,
     resolvedHorizontalRhythm
-  );
+  )
 
-  const toVerticalRhythm = multiply(resolvedVerticalRhythm);
-  const toHorizontalRhythm = multiply(resolvedHorizontalRhythm);
-  const toOutputValue = partial(outputWithUnit, [renderUnit, rootFontSize]);
+  const toVerticalRhythm = multiply(resolvedVerticalRhythm)
+  const toHorizontalRhythm = multiply(resolvedHorizontalRhythm)
+  const toOutputValue = partial(outputWithUnit, [renderUnit, rootFontSize])
   const outputRhythm = calculateRhythm =>
-    compose(toOutputValue, calculateRhythm);
-  const outputVerticalRhythm = outputRhythm(toVerticalRhythm);
-  const outputHorizontalRhythm = outputRhythm(toHorizontalRhythm);
+    compose(toOutputValue, calculateRhythm)
+  const outputVerticalRhythm = outputRhythm(toVerticalRhythm)
+  const outputHorizontalRhythm = outputRhythm(toHorizontalRhythm)
 
   const outputMultipleRhythm = (...args) => {
     switch (args.length) {
@@ -64,43 +64,43 @@ export default config => {
           : joinWithSpace([
               outputVerticalRhythm(args[0]),
               outputHorizontalRhythm(args[0]),
-            ]);
+            ])
       case 2:
         return joinWithSpace([
           outputVerticalRhythm(args[0]),
           outputHorizontalRhythm(args[1]),
-        ]);
+        ])
       case 3:
         return joinWithSpace([
           outputVerticalRhythm(args[0]),
           outputHorizontalRhythm(args[1]),
           outputVerticalRhythm(args[2]),
-        ]);
+        ])
       case 4:
         return joinWithSpace([
           outputVerticalRhythm(args[0]),
           outputHorizontalRhythm(args[1]),
           outputVerticalRhythm(args[2]),
           outputHorizontalRhythm(args[3]),
-        ]);
+        ])
       default:
     }
-    return null;
-  };
+    return null
+  }
 
   const vr = unit => {
     validateAPIRhythmSingleArg(pickIsNotUndefined({ unit })).orElse(
       throwAPIVerticalRhythmError
-    );
-    return outputVerticalRhythm(unit);
-  };
+    )
+    return outputVerticalRhythm(unit)
+  }
 
   const hr = unit => {
     validateAPIRhythmSingleArg(pickIsNotUndefined({ unit })).orElse(
       throwAPIHorizontalRhythmError
-    );
-    return outputHorizontalRhythm(unit);
-  };
+    )
+    return outputHorizontalRhythm(unit)
+  }
 
   const r = (...args) => {
     // Add args to object
@@ -108,10 +108,10 @@ export default config => {
       (acc, v, i) => assoc(`arg${i + 1}`, v, acc),
       {},
       args
-    );
-    validateAPIRhythmMultiArg(o).orElse(throwAPIRhythmError);
-    return outputMultipleRhythm(...args);
-  };
+    )
+    validateAPIRhythmMultiArg(o).orElse(throwAPIRhythmError)
+    return outputMultipleRhythm(...args)
+  }
 
   return {
     vr, // Alias
@@ -120,5 +120,5 @@ export default config => {
     verticalRhythm: vr,
     horizontalRhythm: hr,
     rhythm: r,
-  };
-};
+  }
+}

@@ -1,13 +1,13 @@
-import { values } from 'ramda';
+import { values } from 'ramda'
 import {
   validateIsWhitelistedValue,
   validateIsValidNumber,
   validateIsPlainObject,
-} from 'folktale-validations';
-import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx';
-import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
-import { UNITS, FIELD_NAMES } from './const';
-import validateConfiguredRhythm from './validations/validators/validateConfiguredRhythm';
+} from 'folktale-validations'
+import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx'
+import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber'
+import { UNITS, FIELD_NAMES } from './const'
+import validateConfiguredRhythm from './validations/validators/validateConfiguredRhythm'
 
 const {
   ROOT_FONT_SIZE,
@@ -21,7 +21,7 @@ const {
   ARG2,
   ARG3,
   ARG4,
-} = FIELD_NAMES;
+} = FIELD_NAMES
 
 export const CONFIG = {
   fieldsValidator: validateConfiguredRhythm,
@@ -58,7 +58,7 @@ export const CONFIG = {
       validator: validateIsValidNumber,
     },
   ],
-};
+}
 
 export const RHYTHM_ARGS = {
   fields: [
@@ -69,7 +69,7 @@ export const RHYTHM_ARGS = {
       value: CONFIG,
     },
   ],
-};
+}
 
 export const API_VERTICAL_RHYTHM_ARGS = {
   fields: [
@@ -79,7 +79,7 @@ export const API_VERTICAL_RHYTHM_ARGS = {
       isRequired: true,
     },
   ],
-};
+}
 
 export const API_HORIZONTAL_RHYTHM_ARGS = {
   fields: [
@@ -89,7 +89,7 @@ export const API_HORIZONTAL_RHYTHM_ARGS = {
       isRequired: true,
     },
   ],
-};
+}
 
 export const API_RHYTHM_ARGS = {
   fields: [
@@ -111,4 +111,4 @@ export const API_RHYTHM_ARGS = {
       validator: validateIsValidNumber,
     },
   ],
-};
+}
